@@ -24,3 +24,10 @@
 .intro-btn:hover {
     color: lightgray;
 }
+/*  */
+.card-body-auto {
+    margin-top: 5%;
+}
+.card{
+    margin-top: 5%;
+}
