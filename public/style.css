@@ -1,5 +1,5 @@
 .intro-p {
-    margin-top: 8%;
+    margin-top: 5%;
     margin-bottom: 8%;
     font-size: 300%;
     color: #800000;
@@ -24,10 +24,22 @@
 .intro-btn:hover {
     color: lightgray;
 }
+.intro-btn a {
+    text-decoration: none;
+}
 /*  */
 .card-body-auto {
     margin-top: 5%;
 }
 .card{
     margin-top: 5%;
+}
+h1{
+    color: #800000;
+}
+.container {
+    margin-top: 3%;
+}
+#panel-table{
+    margin-top: 3%;
 }

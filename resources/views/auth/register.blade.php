@@ -66,6 +66,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     Utwórz konto
                                 </button>
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        Mam już konto.
+                                    </a>
                             </div>
                         </div>
                     </form>
