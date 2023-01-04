@@ -18,9 +18,9 @@ Route::get('/', function () {
     return view('index');
 });
 
-// Route::get('/create-babysitter', function () {
-//     return view('/babysitter/create');
-// });
+Route::get('/create-babysitter', function () {
+    return view('/babysitter/create');
+});
 
 Route::get('/panel', [PanelController::class, 'index'])->name('panel');
 Route::get('/getRole/{id}', [PanelController::class, 'getRole'])->name('getRole');
