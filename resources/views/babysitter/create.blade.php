@@ -8,7 +8,7 @@
                 <div class="card-header">Tworzenie profilu niani</div>
 
                 <div class="card-body-auto">
-                    {{-- <form method="POST" action="{{ route('register') }}"> --}}
+                    <form method="POST" action="{{ route('store-babysitter') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mb-3">
@@ -26,7 +26,7 @@
                         <div class="row mb-3">
                             <label for="second_name" class="col-md-4 col-form-label text-md-end">Nazwisko</label>
                             <div class="col-md-6">
-                                <input id="second_name" type="email" class="form-control @error('second_name') is-invalid @enderror" name="second_name" required>
+                                <input id="second_name" class="form-control @error('second_name') is-invalid @enderror" name="second_name" required>
                                 @error('second_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -79,18 +79,15 @@
                         <div class="row mb-3">
                             <label class="col-md-4 col-form-label text-md-end">Dodaj zdjęcie</label>
                             <div class="col-md-6">
-                                <input name="photo" type="file" class="form-control" accept="image/jpg, image/jpeg, image/png"/>
+                                <input type="file" class="form-control form-control-sm" name="image" accept="image/jpg, image/jpeg, image/png"/>
                             </div>
                         </div>
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Utwórz konto
+                                    Utwórz profil
                                 </button>
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        Mam już konto.
-                                    </a>
                             </div>
                         </div>
                     </form>

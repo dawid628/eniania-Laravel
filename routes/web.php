@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BabysitterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,20 +17,19 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('index');
-});
-
-Route::get('/create-babysitter', function () {
-    return view('/babysitter/create');
-});
+})->name('index');
 
 Route::get('/panel', [PanelController::class, 'index'])->name('panel');
 Route::get('/getRole/{id}', [PanelController::class, 'getRole'])->name('getRole');
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::delete('/delete/user/{id}', [UserController::class, 'delete'])->name('delete.user');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Babysitter
+Route::post('/store-babysitter', [App\Http\Controllers\BabysitterController::class, 'store'])->name('store-babysitter');
+Route::get('/create-babysitter', function () {return view('/babysitter/create');});
