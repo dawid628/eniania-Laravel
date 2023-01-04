@@ -15,7 +15,8 @@ class BabysitterController extends Controller
      */
     public function index()
     {
-        //
+        $babysitters = Babysitter::all();
+        return view('/babysitter/index', ['babysitters' => $babysitters]);
     }
 
     /**

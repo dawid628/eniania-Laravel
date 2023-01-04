@@ -33,3 +33,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Babysitter
 Route::post('/store-babysitter', [App\Http\Controllers\BabysitterController::class, 'store'])->name('store-babysitter');
 Route::get('/create-babysitter', function () {return view('/babysitter/create');});
+Route::get('/babysitters', [App\Http\Controllers\BabysitterController::class, 'index'])->name('index-babysitters');

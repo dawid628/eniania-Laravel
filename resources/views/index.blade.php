@@ -11,8 +11,8 @@
     </div>
     <div class="intro">
     <p class="intro-p">MAIN PAGE INDEX</p>
-    <a class="intro-btn" href="/login">NIANIA</a>
-    <a class="intro-btn" href="/login">RODZIC</a>
+    <a class="intro-btn" href="/create-babysitter">NIANIA</a>
+    <a class="intro-btn" href="/babysitters">RODZIC</a>
     </div>
 </div>
 @endsection
