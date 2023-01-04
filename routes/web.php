@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+// Route::get('/create-babysitter', function () {
+//     return view('/babysitter/create');
+// });
+
 Route::get('/panel', [PanelController::class, 'index'])->name('panel');
 Route::get('/getRole/{id}', [PanelController::class, 'getRole'])->name('getRole');
 
@@ -25,3 +29,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::delete('/delete/user/{id}', [UserController::class, 'delete'])->name('delete.user');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
