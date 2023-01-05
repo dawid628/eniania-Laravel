@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+    @isset($problem)
+        <div class="alert alert-danger" role="alert">{{ $problem }}</div>
+    @endisset
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -72,7 +75,7 @@
                         <div class="row mb-3">
                             <label for="description" class="col-md-4 col-form-label text-md-end">Opis</label>
                             <div class="col-md-6">
-                                <textarea id="description" rows="8" class="form-control" name="description" required></textarea>
+                                <textarea id="description" rows="8" class="form-control" name="description" required maxlength="100"></textarea>
                             </div>
                         </div>
                         

@@ -2,8 +2,6 @@
 
 @section('content')
 <div class="container">
-    @foreach($babysitters as $babysitter)
-    <div class="col">
         {{-- <div class="card h-100">
             <!-- Product image-->
             <img class="card-img-top" src="images/{{$babysitter->photo_name}}"  width="450" height="200" alt="error" />
@@ -25,24 +23,36 @@
                 </div>
             </form>
         </div> --}}
-        <div class="row border w-50">
+        <div class="row mt-5">
             <!-- Babysitter image -->
-            <div class="col-sm p-0">
-                <img class="img-thumbnail border-0" src="images/{{$babysitter->photo_name}}"  width="200" height="200" alt="error" />
+            <figure class="figure col-sm">
+                <img class="figure-img img-fluid rounded" src="/images/{{$babysitter->photo_name}}" width="400" height="400" alt="error" />
+                <figcaption>
+                    <label><strong>Imię:</strong> {{ $babysitter->first_name }}</label><br>
+                    <label><strong>Nazwisko:</strong> {{ $babysitter->second_name }}</label><br>
+                    <label><strong>Numer telefonu:</strong> {{ $babysitter->phone_number }}</label><br>
+                    <label><strong>Adres e-mail:</strong> {{ \App\Models\User::find($babysitter->user_id)->email }}</label><br>
+                    <label><strong>Miasto:</strong> {{ $babysitter->city }}</label><br>
+                    <label><strong>Wiek dziecka:</strong> {{ $babysitter->minimum_age }}-{{ $babysitter->maximum_age }} lata</label><br>
+                    <label><strong>Cena za 1h:</strong> {{ $babysitter->price }} PLN</label><br>
+                </figcaption>
+            </figure>
+            <div class="col-md-8 p-0">
+                <p class="lead">
+                    {!! nl2br($babysitter->description) !!}
+                    <br><button class="btn btn-primary">Napisz wiadomosc</button>
+                </p>
             </div>
-            <div class="col-sm m-2">
+            {{-- <div class="col">
                 <label><strong>Imię:</strong> {{ $babysitter->first_name }}</label><br>
                 <label><strong>Nazwisko:</strong> {{ $babysitter->second_name }}</label><br>
                 <label><strong>Miasto:</strong> {{ $babysitter->city }}</label><br>
                 <label><strong>Wiek dziecka:</strong> {{ $babysitter->minimum_age }}-{{ $babysitter->maximum_age }} lata</label><br>
                 <label><strong>Cena za 1h:</strong> {{ $babysitter->price }} PLN</label><br>
                 <button type="submit" class="btn btn-primary m-2">
-                    <a href="/babysitter/{{$babysitter->id}}">Sprawdź</a>
+                    Sprawdź
                 </button>
-            </div>
+            </div> --}}
         </div>
-        
-    </div>
-    @endforeach
 </div>
 @endsection

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Babysitter;
-use App\Http\Controllers\HttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Auth;
 
 class BabysitterController extends Controller
 {
@@ -37,11 +38,13 @@ class BabysitterController extends Controller
      */
     public function store(Request $request)
     {
-        $user_id = $request->user()->id;
-        $babysitter = Babysitter::all()->where('user_id', $user_id);
-        if($babysitter != null){
+        Auth::user()->fresh();
+        $user_id = Auth::id();
+        $babysitter = Babysitter::where('user_id', $user_id)->first();
+        if(!$babysitter == null){
             // uzytkownik posiada juz profil niani
-            return 0;
+            $problem = "Posiadasz już profil niani.";
+            return view('/babysitter/create', ['problem' => $problem]);
         }
         $profile = new Babysitter();
         $profile->first_name = $request->first_name;
@@ -54,15 +57,19 @@ class BabysitterController extends Controller
         $profile->price = $request->price;
         $profile->user_id = $user_id;
         // photo
-        if(!$request->hasFile('image')){return 0;}
+        if(!$request->hasFile('image')){
+            $problem = "Zdjęcie nie spełnia warunków serwisu.";
+            return view('/babysitter/create', ['problem' => $problem]);
+        }
         $file = $request->file('image');
         $fileName = $file->getClientOriginalName();
-        $destinationPath = public_path().'/images' ;
+        $destinationPath = public_path().'/images';
         $file->move($destinationPath, $fileName);
         $profile->photo_name = $fileName; 
 
         if(!($profile->save())) {
-            throw new HttpException(500, "Something went wrong!");
+            $problem = "Coś poszło nie tak.";
+            return view('/babysitter/create', ['problem' => $problem]);
         }
         return redirect()->route('index');
     }
@@ -75,7 +82,10 @@ class BabysitterController extends Controller
      */
     public function show($id)
     {
-        //
+        $babysitter = Babysitter::find($id);
+        if(!$babysitter==null){
+            return view('/babysitter/show', ['babysitter' => $babysitter]);
+        }
     }
 
     /**
