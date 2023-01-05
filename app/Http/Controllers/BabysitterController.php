@@ -27,6 +27,17 @@ class BabysitterController extends Controller
      */
     public function create()
     {
+       
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         Auth::user()->fresh();
         $user_id = Auth::id();
         $babysitter = Babysitter::where('user_id', $user_id)->first();
@@ -64,17 +75,6 @@ class BabysitterController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -96,7 +96,8 @@ class BabysitterController extends Controller
      */
     public function edit($id)
     {
-        //
+        $babysitter = Babysitter::find($id);
+        return view('/babysitter/edit', ['babysitter' => $babysitter]);
     }
 
     /**
@@ -106,9 +107,32 @@ class BabysitterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $babysitter = Babysitter::find($request->id);
+        $babysitter->first_name = $request->first_name;
+        $babysitter->second_name = $request->second_name;
+        $babysitter->phone_number = $request->phone_number;
+        $babysitter->city = $request->city;
+        $babysitter->minimum_age = $request->minimum_age;
+        $babysitter->maximum_age = $request->maximum_age;
+        $babysitter->price = $request->price;
+        $babysitter->description = $request->description;
+
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $fileName = $file->getClientOriginalName();
+            $destinationPath = public_path().'/images';
+            $file->move($destinationPath, $fileName);
+            $babysitter->photo_name = $fileName; 
+        }
+
+        if($babysitter->save()){
+            $message = "Pomyślnie zaktualizowano profil.";
+            return view('/babysitter/show', ['babysitter' => $babysitter, 'message' => $message]);
+        }
+        $error = "Coś poszło nie tak.";
+        return view('/babysitter/show', ['babysitter' => $babysitter, 'error' => $error]);
     }
 
     /**

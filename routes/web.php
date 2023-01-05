@@ -30,10 +30,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Babysitter
-Route::post('/store-babysitter', [App\Http\Controllers\BabysitterController::class, 'create'])->name('store-babysitter');
+Route::post('/store-babysitter', [App\Http\Controllers\BabysitterController::class, 'store'])->name('store-babysitter');
 Route::get('/create-babysitter', function () {return view('/babysitter/create');});
 Route::get('/babysitters', [App\Http\Controllers\BabysitterController::class, 'index'])->name('index-babysitters');
 Route::get('/babysitter/{id}', [App\Http\Controllers\BabysitterController::class, 'show'])->name('show-babysitters');
+Route::get('/edit/{id}', [App\Http\Controllers\BabysitterController::class, 'edit'])->name('edit-babysitters');
+Route::post('/update-babysitter', [App\Http\Controllers\BabysitterController::class, 'update'])->name('update-babysitters');
 
 // User
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');

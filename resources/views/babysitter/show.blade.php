@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+@isset($message)
+<div class="alert alert-success" role="alert">{{ $message }}</div>
+@endisset
+@isset($error)
+<div class="alert alert-danger" role="alert">{{ $problem }}</div>
+@endisset
 <div class="container">
         {{-- <div class="card h-100">
             <!-- Product image-->
@@ -44,7 +50,7 @@
                     <br><button class="btn btn-dark mt-3">Napisz wiadomosc</button>
                     @endif
                     @if(Auth::id() == $babysitter->user_id)
-                    <br><button class="btn btn-dark mt-3">Edytuj</button>
+                    <br><a class="btn btn-dark mt-3" href="/edit/{{ $babysitter->id }}">Edytuj</a>
                     @endif
                 </p>
             </div>
