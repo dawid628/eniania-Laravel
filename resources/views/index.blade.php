@@ -1,18 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-
+    <div class="container">
+        <h1 class="display-2 m-3 text-center">Kim jesteś?</h1>
+        <div class="row text-center">
+            <div class="col-sm mt-5" >
+                <a class="btn btn-dark btn-lg rounded-circle p-5 m-3 w-50" href="/create-babysitter">NIANIA</a>
+                <a class="btn btn-dark btn-lg rounded-circle p-5 m-3 w-50" href="/babysitters">RODZIC</a> 
             </div>
         </div>
     </div>
-    <div class="intro">
-    <p class="intro-p">MAIN PAGE INDEX</p>
-    <a class="intro-btn" href="/create-babysitter">NIANIA</a>
-    <a class="intro-btn" href="/babysitters">RODZIC</a>
-    </div>
-</div>
 @endsection

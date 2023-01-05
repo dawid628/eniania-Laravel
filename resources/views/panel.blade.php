@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-    
 <h1 class="text-center">PANEL ADMINISTRATORA</h1>
     <table id="panel-table" class="table table-bordered">
         <thead>
@@ -29,6 +28,18 @@
                     @method('delete')
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
+                @if($user->roles->last()->name == 'user')
+                <form method="POST" action="" class="mt-1">
+                  @csrf
+                  <button type="submit" class="btn btn-primary">Nadaj uprawnienia</button>
+              </form>
+                @endif
+                @if($user->roles->last()->name == 'moderator')
+                <form method="POST" action="" class="mt-1">
+                  @csrf
+                  <button type="submit" class="btn btn-primary">Zabierz uprawnienia</button>
+              </form>
+                @endif
             </td>
           </tr>
           @endforeach

@@ -25,7 +25,7 @@
                 </div>
             </form>
         </div> --}}
-        <div class="row border w-50">
+        <div class="row border w-50 mb-3">
             <!-- Babysitter image -->
             <div class="col-sm p-0">
                 <img class="img-thumbnail border-0" src="images/{{$babysitter->photo_name}}"  width="200" height="200" alt="error" />
@@ -36,9 +36,7 @@
                 <label><strong>Miasto:</strong> {{ $babysitter->city }}</label><br>
                 <label><strong>Wiek dziecka:</strong> {{ $babysitter->minimum_age }}-{{ $babysitter->maximum_age }} lata</label><br>
                 <label><strong>Cena za 1h:</strong> {{ $babysitter->price }} PLN</label><br>
-                <button type="submit" class="btn btn-primary m-2">
-                    <a href="/babysitter/{{$babysitter->id}}">Sprawdź</a>
-                </button>
+                <a class="btn btn-dark m-2" href="/babysitter/{{$babysitter->id}}">Sprawdź</a>
             </div>
         </div>
         

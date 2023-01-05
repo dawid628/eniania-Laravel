@@ -40,7 +40,7 @@
             <div class="col-md-8 p-0">
                 <p class="lead">
                     {!! nl2br($babysitter->description) !!}
-                    <br><button class="btn btn-primary">Napisz wiadomosc</button>
+                    <br><button class="btn btn-dark mt-3">Napisz wiadomosc</button>
                 </p>
             </div>
             {{-- <div class="col">

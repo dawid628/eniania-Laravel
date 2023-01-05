@@ -30,5 +30,5 @@ class UserController extends Controller
         $roleId = RoleToUser::where('user_id', $id)->first();
         $role = Role::where('id', $roleId->id)->pluck('name')->first();
         return $role; 
-    }
+    }   
 }

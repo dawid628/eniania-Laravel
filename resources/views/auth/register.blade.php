@@ -63,7 +63,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-dark">
                                     Utwórz konto
                                 </button>
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
