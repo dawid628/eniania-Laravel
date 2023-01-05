@@ -27,17 +27,6 @@ class BabysitterController extends Controller
      */
     public function create()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
         Auth::user()->fresh();
         $user_id = Auth::id();
         $babysitter = Babysitter::where('user_id', $user_id)->first();
@@ -72,6 +61,17 @@ class BabysitterController extends Controller
             return view('/babysitter/create', ['problem' => $problem]);
         }
         return redirect()->route('index');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        
     }
 
     /**

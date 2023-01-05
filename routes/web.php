@@ -23,15 +23,20 @@ Route::get('/panel', [PanelController::class, 'index'])->name('panel');
 Route::get('/getRole/{id}', [PanelController::class, 'getRole'])->name('getRole');
 
 Auth::routes();
-Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
-Route::delete('/delete/user/{id}', [UserController::class, 'delete'])->name('delete.user');
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Babysitter
-Route::post('/store-babysitter', [App\Http\Controllers\BabysitterController::class, 'store'])->name('store-babysitter');
+Route::post('/store-babysitter', [App\Http\Controllers\BabysitterController::class, 'create'])->name('store-babysitter');
 Route::get('/create-babysitter', function () {return view('/babysitter/create');});
 Route::get('/babysitters', [App\Http\Controllers\BabysitterController::class, 'index'])->name('index-babysitters');
 Route::get('/babysitter/{id}', [App\Http\Controllers\BabysitterController::class, 'show'])->name('show-babysitters');
+
+// User
+Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::delete('/delete/user/{id}', [UserController::class, 'delete'])->name('delete.user');
+Route::get('/profil', [UserController::class, 'show'])->name('show-profile');
+Route::post('/store-user', [App\Http\Controllers\UserController::class, 'store'])->name('store-user');

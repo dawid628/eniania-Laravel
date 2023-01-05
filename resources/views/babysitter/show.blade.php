@@ -40,7 +40,12 @@
             <div class="col-md-8 p-0">
                 <p class="lead">
                     {!! nl2br($babysitter->description) !!}
+                    @if(Auth::id() != $babysitter->user_id)
                     <br><button class="btn btn-dark mt-3">Napisz wiadomosc</button>
+                    @endif
+                    @if(Auth::id() == $babysitter->user_id)
+                    <br><button class="btn btn-dark mt-3">Edytuj</button>
+                    @endif
                 </p>
             </div>
             {{-- <div class="col">
