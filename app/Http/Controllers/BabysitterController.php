@@ -143,6 +143,11 @@ class BabysitterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Babysitter::find($id)->delete()){
+            $message = "Pomyślnie usunięto profil niani.";
+            return redirect()->route('show-profile')->with('message', $message);
+        }
+        $error = "Nie udało się usunąć profilu niani.";
+        return redirect()->route('show-profile')->with('error', $error);
     }
 }

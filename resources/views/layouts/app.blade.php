@@ -18,7 +18,11 @@
           <div class="navbar-nav ">
             <a class="nav-item nav-link active text-white" href="#">Home</a>
             <a class="nav-item nav-link text-white" href="/babysitters">Nianie</a>
-            <a class="nav-item nav-link text-white" href="/panel">Panel</a>
+            @if(Auth::user())
+                @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
+                    <a class="nav-item nav-link text-white" href="/panel">Panel</a>
+                @endif
+            @endif
           </div>
         </div>
         @if(Auth::user())

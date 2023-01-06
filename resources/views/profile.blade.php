@@ -7,6 +7,12 @@
 @isset($error)
 <div class="alert alert-danger" role="alert">{{ $problem }}</div>
 @endisset
+@if(Session::has('message'))
+<div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
+@endif
+@if(Session::has('error'))
+<div class="alert alert-danger" role="alert">{{Session::get('error')}}</div>
+@endif
 <div class="container">
     <h1 class="display-4 m-2 text-center mb-0">Profil użytkownika</h1>
     <div class="card-body p-5">
@@ -25,9 +31,9 @@
             <button type="submit" class="btn btn-dark">Zapisz zmiany</button>
         </form>
     </div>
-    @if(\App\Models\Babysitter::where('user_id', $user->id))
-    <h2 class="display-7 m-4 m-0">Twój profil niani:</h2>
-        <table id="panel-table" class="table table-bordered">
+    @if(\App\Models\Babysitter::where('user_id', $user->id)->first() != null)
+    <h2 class="display-7 p-5 pt-0 mb-0">Twój profil niani:</h2>
+        <table class="table table-bordered m-5 mt-0">
             <thead>
               <tr>
                 <th scope="col">Imię</th>
@@ -41,10 +47,16 @@
                 <td >{{ \App\Models\Babysitter::where('user_id', $user->id)->value('first_name') }}</td>
                 <td>{{ \App\Models\Babysitter::where('user_id', $user->id)->value('second_name') }}</td>
                 <td>{{ \App\Models\Babysitter::where('user_id', $user->id)->value('city') }}</td>
-                <td><a class="btn btn-dark m-2" href="/babysitter/{{\App\Models\Babysitter::where('user_id', $user->id)->value('id')}}">Podgląd</a></td>
+                <td>
+                  <a class="btn btn-dark m-2" href="/babysitter/{{\App\Models\Babysitter::where('user_id', $user->id)->value('id')}}">Podgląd</a>
+                  <a class="btn btn-dark m-2" href="edit/{{\App\Models\Babysitter::where('user_id', $user->id)->value('id')}}">Edytuj</a>
+                  <a class="btn btn-dark m-2" href="delete/{{ \App\Models\Babysitter::where('user_id', $user->id)->value('id') }}">Usuń</a>
+                </td>
               </tr>
             </tbody>
           </table>
+    @else
+      <h2 class="display-7 m-4 m-0">Nie masz jeszcze profilu niani. <a class="btn btn-dark" href="/create-babysitter">Stwórz</a></h2>
     @endif
 </div>
 @endsection
