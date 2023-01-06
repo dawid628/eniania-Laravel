@@ -8,6 +8,8 @@
 <div class="alert alert-danger" role="alert">{{ $error }}</div>
 @endisset
 <div class="container">
+  <form method="POST" action="{{ route('sendMail') }}">
+    @csrf
         <div class="card shadow-none mt-3 border border-light">
             <div class="card-body">
               <div class="media mb-3">
@@ -17,6 +19,7 @@
                      <span class="media-meta float-right">{{ $report->created_at }}</span>
                      <h4 class="text-primary m-0">{{ \App\Models\User::find($report->user_id)->name }}</h4>
                      <small class="text-muted">From : {{ \App\Models\User::find($report->user_id)->email }}</small>
+                     <input name="email" value="{{ \App\Models\User::find($report->user_id)->email }}" hidden>
                    </div>
                </div>
 
@@ -25,14 +28,16 @@
                <hr>
                <div class="media mt-3">
                    <div class="media-body">
-                       <textarea class="wysihtml5 form-control" rows="9" placeholder="Odpowiedz tutaj..."></textarea>
+                      <input name="title" value="{{ $report->title }}" hidden>
+                       <textarea class="wysihtml5 form-control" name="answer" rows="9" placeholder="Odpowiedz tutaj..."></textarea>
                    </div>
                </div>
                <div class="text-right">
-                   <button type="button" class="btn btn-dark waves-effect waves-light mt-3"><i class="fa fa-send mr-1"></i>Wyślij</button>
+                   <button type="submit" class="btn btn-dark waves-effect waves-light mt-3"><i class="fa fa-send mr-1"></i>Wyślij</button>
                </div>
            
            </div>
          </div>
+        </form>
      </div>       
 @endsection

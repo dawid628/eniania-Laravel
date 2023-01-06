@@ -6,6 +6,7 @@ use App\Http\Controllers\PanelController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\BabysitterController;
+use App\Http\Controllers\MailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,4 +64,7 @@ Route::group(['middleware' => 'roles', 'roles' => ['admin', 'moderator', 'user']
     // Report
     Route::get('/contact', function () {return view('contact');})->name('contact');
     Route::post('/report', [ReportController::class, 'store'])->name('create-report');
+
 });
+
+Route::post('/sendMail', [MailController::class, 'sendMail'])->name('sendMail');
