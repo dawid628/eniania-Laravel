@@ -13,7 +13,7 @@
   <a class="btn btn-light" href="{{route('panel')}}">Użytkownicy</a>
   <a class="btn btn-light" href="{{ route('confirming') }}">Oczekujące</a>
   <a class="btn btn-light" href="{{route('panel-babysitters')}}">Ogłoszenia</a>
-  <a class="btn btn-light" href="">Zgłoszenia</a>
+  <a class="btn btn-light" href="{{ route('reports') }}">Zgłoszenia</a>
 </div>
     @yield('contento')
     </div>

@@ -32,6 +32,10 @@
                 </a>
             </div>
             <div class="col-sm">
+                <a class="text-decoration-none text-white" href="/contact">Kontakt
+                </a>
+            </div>
+            <div class="col-sm">
                 <a class="text-decoration-none text-white" href="/logout">Wyloguj</a>
             </div>
         </div>

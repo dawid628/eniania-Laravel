@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\BabysitterController;
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,11 @@ Route::group(['middleware' => 'roles', 'roles' => ['admin', 'moderator']], funct
     Route::get('/confirming', [BabysitterController::class, 'noConfirmed'])->name('confirming');
     Route::get('/confirm/{id}', [BabysitterController::class, 'confirm'])->name('confirm');
     Route::get('/unconfirm/{id}', [BabysitterController::class, 'unConfirm'])->name('unconfirm');
+
+    // Reports
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports');
+    Route::get('/report/{id}', [App\Http\Controllers\ReportController::class, 'show'])->name('show-report');
+    Route::get('/confirm-report/{id}', [App\Http\Controllers\ReportController::class, 'confirm'])->name('confirm-report');
 });
 
 Route::group(['middleware' => 'roles', 'roles' => ['admin', 'moderator', 'user']], function(){
@@ -53,4 +59,8 @@ Route::group(['middleware' => 'roles', 'roles' => ['admin', 'moderator', 'user']
     Route::get('/profil', [UserController::class, 'show'])->name('show-profile');
     Route::post('/store-user', [App\Http\Controllers\UserController::class, 'store'])->name('store-user');
     Route::get('/getRole/{id}', [PanelController::class, 'getRole'])->name('getRole');
+
+    // Report
+    Route::get('/contact', function () {return view('contact');})->name('contact');
+    Route::post('/report', [ReportController::class, 'store'])->name('create-report');
 });

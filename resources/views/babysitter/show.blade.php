@@ -5,7 +5,7 @@
 <div class="alert alert-success" role="alert">{{ $message }}</div>
 @endisset
 @isset($error)
-<div class="alert alert-danger" role="alert">{{ $problem }}</div>
+<div class="alert alert-danger" role="alert">{{ $error }}</div>
 @endisset
 <div class="container">
         {{-- <div class="card h-100">
