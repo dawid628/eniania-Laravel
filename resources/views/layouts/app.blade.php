@@ -26,9 +26,10 @@
           </div>
         </div>
         @if(Auth::user())
-        <div class="row m-4">
+        <div class="row m-3 p-1">
             <div class="col-sm">
-                <a class="text-decoration-none text-white" href="/profil">Profil</a>
+                <a class="text-decoration-none text-white" href="/profil">Profil
+                </a>
             </div>
             <div class="col-sm">
                 <a class="text-decoration-none text-white" href="/logout">Wyloguj</a>

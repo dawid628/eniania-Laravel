@@ -2,7 +2,11 @@
 
 @section('content')
 <div class="container">
+    @if(\App\Models\Babysitter::where('confirmed', 1)->count() == 0)
+        <div class="alert alert-warning mt-5" role="alert">Przepraszamy, brak aktualnych ogłoszeń.</div>
+    @endif
     @foreach($babysitters as $babysitter)
+    @if($babysitter->confirmed)
     <div class="col">
         {{-- <div class="card h-100">
             <!-- Product image-->
@@ -41,6 +45,7 @@
         </div>
         
     </div>
+    @endif
     @endforeach
 </div>
 @endsection

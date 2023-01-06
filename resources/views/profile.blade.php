@@ -39,6 +39,7 @@
                 <th scope="col">Imię</th>
                 <th scope="col">Nazwisko</th>
                 <th scope="col">Miasto</th>
+                <th scope="col">Potwierdzony</th>
                 <th scope="col">Akcje</th>
               </tr>
             </thead>
@@ -47,6 +48,14 @@
                 <td >{{ \App\Models\Babysitter::where('user_id', $user->id)->value('first_name') }}</td>
                 <td>{{ \App\Models\Babysitter::where('user_id', $user->id)->value('second_name') }}</td>
                 <td>{{ \App\Models\Babysitter::where('user_id', $user->id)->value('city') }}</td>
+                <td>
+                  @if(\App\Models\Babysitter::where('user_id', $user->id)->value('confirmed') == 0)
+                    Oczekiwanie
+                    @endif
+                  @if(\App\Models\Babysitter::where('user_id', $user->id)->value('confirmed') == 1)
+                    Potwierdzono
+                  @endif
+                </td>
                 <td>
                   <a class="btn btn-dark m-2" href="/babysitter/{{\App\Models\Babysitter::where('user_id', $user->id)->value('id')}}">Podgląd</a>
                   <a class="btn btn-dark m-2" href="edit/{{\App\Models\Babysitter::where('user_id', $user->id)->value('id')}}">Edytuj</a>

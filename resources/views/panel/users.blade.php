@@ -1,14 +1,5 @@
-@extends('layouts.app')
-
-@section('content')
-@if(Session::has('message'))
-<div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
-@endif
-@if(Session::has('error'))
-<div class="alert alert-danger" role="alert">{{Session::get('error')}}</div>
-@endif
-<div class="container">
-<h1 class="text-center">PANEL ADMINISTRATORA</h1>
+@extends('panel.layout')
+@section('contento')
     <table id="panel-table" class="table table-bordered">
         <thead>
           <tr>
@@ -29,24 +20,42 @@
             <td>{{ $user->roles->last()->name }}</td>
             <td>{{ $user->updated_at }}</td>  
             <td>
+              @if($user->roles->last()->name != 'admin')
+              
                 <form method="POST" action="{{ route('delete.user', ['id' => $user->id]) }}">
                     @csrf
                     @method('delete')
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <div class="row m-1"> 
+                      <button type="submit" class="btn btn-danger">Usuń</button>
+                    </div> 
                 </form>
+                @else
+                  <div class="alert alert-warning m-0 text-center"><strong>brak akcji</strong></div>
+                @endif
                 @if($user->roles->last()->name == 'user')
-                  <a class="btn btn-primary mt-1" href="/makemoderator/{{ $user->id }}">Nadaj uprawnienia</a>
+                  @if(Auth::user()->roles->last()->name == 'admin')
+                  <div class="row m-1">
+                    <a class="btn btn-primary mt-1" href="/makemoderator/{{ $user->id }}">Nadaj moderatora</a>
+                  </div>
+                  @endif
                 @endif
                 @if($user->roles->last()->name == 'moderator')
-               
-                  <a class="btn btn-primary mt-1" href="/makeuser/{{ $user->id }}">Zabierz uprawnienia</a>
-      
+                  @if(Auth::user()->roles->last()->name == 'admin')
+                  <div class="row m-1">
+                    <a class="btn btn-primary mt-1" href="/makeuser/{{ $user->id }}">Zabierz moderatora</a>
+                  </div>
+                  @endif
+                @endif
+                @if($user->roles->last()->name != 'admin')
+                @if(Auth::user()->roles->last()->name == 'admin')
+                  <div class="row m-1">
+                    <a class="btn btn-primary mt-1" href="/makeadmin/{{ $user->id }}">Oddaj administratora</a>
+                  </div>
+                @endif
                 @endif
             </td>
           </tr>
           @endforeach
         </tbody>
       </table>
-    </div>
-</div>
 @endsection

@@ -145,9 +145,43 @@ class BabysitterController extends Controller
     {
         if(Babysitter::find($id)->delete()){
             $message = "Pomyślnie usunięto profil niani.";
-            return redirect()->route('show-profile')->with('message', $message);
+            return redirect()->back()->with('message', $message);
         }
         $error = "Nie udało się usunąć profilu niani.";
         return redirect()->route('show-profile')->with('error', $error);
+    }
+
+    public function noConfirmed()
+    {
+        $babysitters = Babysitter::all()->where('confirmed', 0);
+        return view('/panel/nonconfirmed', ['babysitters' => $babysitters]);
+    }
+    
+    public function confirm($id)
+    {
+        $babysitter = Babysitter::find($id);
+        if($babysitter == null){
+            return redirect()->route('confirming')->with('error', 'Coś poszło nie tak.');
+        }
+        $babysitter->confirmed = 1;
+        $babysitter->save();
+        return redirect()->route('confirming')->with('message', 'Pomyślnie potwierdzono profil.');;
+    }
+
+    public function unConfirm($id)
+    {
+        $babysitter = Babysitter::find($id);
+        if($babysitter == null){
+            return redirect()->route('confirming')->with('error', 'Coś poszło nie tak.');
+        }
+        $babysitter->confirmed = 0;
+        $babysitter->save();
+        // return redirect()->route('confirming')->with('message', 'Pomyślnie potwierdzono profil.');
+        return redirect()->back()->with('message', 'Pomyślnie wyłączono profil.');
+    }
+    public function showAll()
+    {
+        $babysitters = Babysitter::all();
+        return view('panel/babysitters', ['babysitters' => $babysitters]);
     }
 }

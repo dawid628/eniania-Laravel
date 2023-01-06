@@ -20,11 +20,20 @@ Auth::routes();
 Route::get('/', function () {return view('index');})->name('index');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::group(['middleware' => 'roles', 'roles' => ['admin']], function(){
+    Route::get('/makemoderator/{user_id}', [PanelController::class, 'makeModerator'])->name('makeModerator');
+    Route::get('/makeuser/{user_id}', [PanelController::class, 'makeUser'])->name('makeUser');
+    Route::get('/makeadmin/{user_id}', [PanelController::class, 'makeAdmin'])->name('makeAdmin');
+}); 
+
+
 Route::group(['middleware' => 'roles', 'roles' => ['admin', 'moderator']], function(){
     // Panel
     Route::get('/panel', [PanelController::class, 'index'])->name('panel');
-    Route::get('/makemoderator/{user_id}', [PanelController::class, 'makeModerator'])->name('makeModerator');
-    Route::get('/makeuser/{user_id}', [PanelController::class, 'makeUser'])->name('makeUser');
+
+    Route::get('/confirming', [BabysitterController::class, 'noConfirmed'])->name('confirming');
+    Route::get('/confirm/{id}', [BabysitterController::class, 'confirm'])->name('confirm');
+    Route::get('/unconfirm/{id}', [BabysitterController::class, 'unConfirm'])->name('unconfirm');
 });
 
 Route::group(['middleware' => 'roles', 'roles' => ['admin', 'moderator', 'user']], function(){
@@ -32,6 +41,7 @@ Route::group(['middleware' => 'roles', 'roles' => ['admin', 'moderator', 'user']
     Route::post('/store-babysitter', [App\Http\Controllers\BabysitterController::class, 'store'])->name('store-babysitter');
     Route::get('/create-babysitter', [App\Http\Controllers\BabysitterController::class, 'create']);
     Route::get('/babysitters', [App\Http\Controllers\BabysitterController::class, 'index'])->name('index-babysitters');
+    Route::get('/panel-babysitters', [App\Http\Controllers\BabysitterController::class, 'showAll'])->name('panel-babysitters');
     Route::get('/babysitter/{id}', [App\Http\Controllers\BabysitterController::class, 'show'])->name('show-babysitters');
     Route::get('/edit/{id}', [App\Http\Controllers\BabysitterController::class, 'edit'])->name('edit-babysitters');
     Route::get('/delete/{id}', [App\Http\Controllers\BabysitterController::class, 'destroy'])->name('delete-babysitter');
