@@ -27,7 +27,7 @@ class BabysitterController extends Controller
      */
     public function create()
     {
-       
+        return view('/babysitter/create');
     }
 
     /**

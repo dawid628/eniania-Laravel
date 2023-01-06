@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+@if(Session::has('message'))
+<div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
+@endif
+@if(Session::has('error'))
+<div class="alert alert-danger" role="alert">{{Session::get('error')}}</div>
+@endif
 <div class="container">
 <h1 class="text-center">PANEL ADMINISTRATORA</h1>
     <table id="panel-table" class="table table-bordered">
@@ -29,16 +35,12 @@
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
                 @if($user->roles->last()->name == 'user')
-                <form method="POST" action="" class="mt-1">
-                  @csrf
-                  <button type="submit" class="btn btn-primary">Nadaj uprawnienia</button>
-              </form>
+                  <a class="btn btn-primary mt-1" href="/makemoderator/{{ $user->id }}">Nadaj uprawnienia</a>
                 @endif
                 @if($user->roles->last()->name == 'moderator')
-                <form method="POST" action="" class="mt-1">
-                  @csrf
-                  <button type="submit" class="btn btn-primary">Zabierz uprawnienia</button>
-              </form>
+               
+                  <a class="btn btn-primary mt-1" href="/makeuser/{{ $user->id }}">Zabierz uprawnienia</a>
+      
                 @endif
             </td>
           </tr>

@@ -19,8 +19,8 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/panel', [PanelController::class, 'index'])->name('panel');
-Route::get('/getRole/{id}', [PanelController::class, 'getRole'])->name('getRole');
+
+
 
 Auth::routes();
 
@@ -31,7 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Babysitter
 Route::post('/store-babysitter', [App\Http\Controllers\BabysitterController::class, 'store'])->name('store-babysitter');
-Route::get('/create-babysitter', function () {return view('/babysitter/create');});
+Route::get('/create-babysitter', [App\Http\Controllers\BabysitterController::class, 'create']);
 Route::get('/babysitters', [App\Http\Controllers\BabysitterController::class, 'index'])->name('index-babysitters');
 Route::get('/babysitter/{id}', [App\Http\Controllers\BabysitterController::class, 'show'])->name('show-babysitters');
 Route::get('/edit/{id}', [App\Http\Controllers\BabysitterController::class, 'edit'])->name('edit-babysitters');
@@ -42,3 +42,9 @@ Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout
 Route::delete('/delete/user/{id}', [UserController::class, 'delete'])->name('delete.user');
 Route::get('/profil', [UserController::class, 'show'])->name('show-profile');
 Route::post('/store-user', [App\Http\Controllers\UserController::class, 'store'])->name('store-user');
+Route::get('/getRole/{id}', [PanelController::class, 'getRole'])->name('getRole');
+
+// Panel
+Route::get('/panel', [PanelController::class, 'index'])->name('panel');
+Route::get('/makemoderator/{user_id}', [PanelController::class, 'makeModerator'])->name('makeModerator');
+Route::get('/makeuser/{user_id}', [PanelController::class, 'makeUser'])->name('makeUser');
