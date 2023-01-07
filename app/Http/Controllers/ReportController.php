@@ -16,7 +16,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $reports = Report::all()->sortDesc();
+        $reports = Report::orderBy('id', 'desc')->paginate(5);
         return view('/panel/reports', ['reports' => $reports]);
     }
 

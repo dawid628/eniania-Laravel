@@ -12,7 +12,7 @@ class PanelController extends Controller
 {
     public function index()
     {
-        $users =  User::with('roles')->whereHas('roles')->get();
+        $users =  User::with('roles')->whereHas('roles')->paginate(5);
         return view('/panel/users', ['users' => $users]);
     }
 

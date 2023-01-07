@@ -16,7 +16,7 @@ class BabysitterController extends Controller
      */
     public function index()
     {
-        $babysitters = Babysitter::all();
+        $babysitters = Babysitter::paginate(5);
         return view('/babysitter/index', ['babysitters' => $babysitters]);
     }
 
@@ -153,7 +153,7 @@ class BabysitterController extends Controller
 
     public function noConfirmed()
     {
-        $babysitters = Babysitter::all()->where('confirmed', 0);
+        $babysitters = Babysitter::where('confirmed', 0)->paginate(5);
         return view('/panel/nonconfirmed', ['babysitters' => $babysitters]);
     }
     
@@ -181,7 +181,7 @@ class BabysitterController extends Controller
     }
     public function showAll()
     {
-        $babysitters = Babysitter::all();
+        $babysitters = Babysitter::paginate(5);
         return view('panel/babysitters', ['babysitters' => $babysitters]);
     }
 }

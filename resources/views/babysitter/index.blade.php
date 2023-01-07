@@ -47,5 +47,7 @@
     </div>
     @endif
     @endforeach
+    {{ $babysitters->links() }}
 </div>
+
 @endsection

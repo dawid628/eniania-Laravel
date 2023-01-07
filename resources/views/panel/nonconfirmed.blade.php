@@ -28,6 +28,7 @@
           @endforeach
         </tbody>
       </table>
+      {{ $babysitters->links() }}
       @else
       <div class="alert alert-warning mt-5" role="alert">Brak oczekujących niań.</div>
       @endif

@@ -34,4 +34,5 @@
       @else
       <div class="alert alert-warning mt-5" role="alert">Brak niań.</div>
       @endif
+      {{$babysitters->links()}}
 @endsection
