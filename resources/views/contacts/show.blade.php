@@ -29,6 +29,7 @@
                <div class="media mt-3">
                    <div class="media-body">
                       <input name="title" value="{{ $report->title }}" hidden>
+                      <input name="report_id" value="{{ $report->id }}" hidden>
                        <textarea class="wysihtml5 form-control" name="answer" rows="9" placeholder="Odpowiedz tutaj..."></textarea>
                    </div>
                </div>
