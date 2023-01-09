@@ -16,8 +16,8 @@
         </button> --}}
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ">
-            <a class="nav-item nav-link active text-white" href="#">Home</a>
             <a class="nav-item nav-link text-white" href="/babysitters">Nianie</a>
+            <a class="nav-item nav-link text-white" href="/contact">Kontakt</a>
             @if(Auth::user())
                 @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
                     <a class="nav-item nav-link text-white" href="/panel">Panel</a>
@@ -28,25 +28,21 @@
         @if(Auth::user())
         <div class="row m-3 p-1">
             <div class="col-sm">
-                <a class="text-decoration-none text-white" href="/profil">Profil
+                <a class="nav-item nav-link text-white" href="/profil">Profil
                 </a>
             </div>
             <div class="col-sm">
-                <a class="text-decoration-none text-white" href="/contact">Kontakt
-                </a>
-            </div>
-            <div class="col-sm">
-                <a class="text-decoration-none text-white" href="/logout">Wyloguj</a>
+                <a class="nav-item nav-link text-white" href="/logout">Wyloguj</a>
             </div>
         </div>
         @endif
         @if(!Auth::user())
         <div class="row m-4">
             <div class="col-sm">
-                <a class="text-decoration-none text-white" href="/login">Logowanie</a>
+                <a class="nav-item nav-link text-white" href="/login">Logowanie</a>
             </div>
             <div class="col-sm">
-                <a class="text-decoration-none text-white" href="/register">Rejestracja</a>
+                <a class="nav-item nav-link text-white" href="/register">Rejestracja</a>
             </div>
         </div>
         @endif
