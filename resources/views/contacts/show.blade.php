@@ -22,10 +22,21 @@
                      <input name="email" value="{{ \App\Models\User::find($report->user_id)->email }}" hidden>
                    </div>
                </div>
-
                <p><b>{{ $report->title }}...</b></p>
                <p>{!! nl2br($report->message) !!}</p>
                <hr>
+              @isset($replies)
+                @foreach($replies as $reply)
+                <div class="media mb-1">
+                  <div class="media-body">
+                     <h4 class="text-primary m-0 "> {{ $reply->author }}</h4>
+                     <small class="text-muted">{{ $reply->created_at }}</small>
+                   </div>
+               </div>
+               <p>{!! nl2br($reply->message) !!}</p>
+               <hr>
+                @endforeach
+              @endisset
                <div class="media mt-3">
                    <div class="media-body">
                       <input name="title" value="{{ $report->title }}" hidden>

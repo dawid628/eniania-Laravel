@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Report;
+use App\Models\Reply;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Answer;
 
@@ -60,7 +61,9 @@ class ReportController extends Controller
     {
         $report = Report::find($id);
         if(!$report==null){
-            return view('/contacts/show', ['report' => $report]);
+            $replies = Reply::all()->where('report_id', $id);
+
+            return view('/contacts/show', ['report' => $report, 'replies' => $replies]);
         }
     }
 
