@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\BabysitterController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\MessageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +66,8 @@ Route::group(['middleware' => 'roles', 'roles' => ['admin', 'moderator', 'user']
     Route::get('/contact', function () {return view('contact');})->name('contact');
     Route::post('/report', [ReportController::class, 'store'])->name('create-report');
 
+    // Chat
+    Route::get('/chat', [App\Http\Controllers\MessageController::class, 'index'])->name('chat');
 });
 
 Route::post('/sendMail', [MailController::class, 'sendMail'])->name('sendMail');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Babysitter;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Str;
 use Auth;
 
 class BabysitterController extends Controller
@@ -18,6 +19,11 @@ class BabysitterController extends Controller
     {
         $babysitters = Babysitter::paginate(5);
         return view('/babysitter/index', ['babysitters' => $babysitters]);
+    }
+
+    public function sort()
+    {
+        
     }
 
     /**
@@ -50,7 +56,7 @@ class BabysitterController extends Controller
         $profile->first_name = $request->first_name;
         $profile->second_name = $request->second_name;
         $profile->phone_number = $request->phone_number;
-        $profile->city = $request->city;
+        $profile->city = Str::lower($request->city);
         $profile->description = $request->description;
         $profile->minimum_age = $request-> minimum_age;
         $profile->maximum_age = $request-> maximum_age;
@@ -113,7 +119,7 @@ class BabysitterController extends Controller
         $babysitter->first_name = $request->first_name;
         $babysitter->second_name = $request->second_name;
         $babysitter->phone_number = $request->phone_number;
-        $babysitter->city = $request->city;
+        $babysitter->city = Str::lower($request->city);
         $babysitter->minimum_age = $request->minimum_age;
         $babysitter->maximum_age = $request->maximum_age;
         $babysitter->price = $request->price;

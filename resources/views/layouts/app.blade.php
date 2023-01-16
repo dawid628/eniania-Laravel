@@ -28,6 +28,10 @@
         @if(Auth::user())
         <div class="row m-3 p-1">
             <div class="col-sm">
+                <a class="nav-item nav-link text-white" href="/chat">Czat
+                </a>
+            </div>
+            <div class="col-sm">
                 <a class="nav-item nav-link text-white" href="/profil">Profil
                 </a>
             </div>

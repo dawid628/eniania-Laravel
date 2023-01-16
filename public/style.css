@@ -29,3 +29,7 @@
 #panel-table{
     margin-top: 3%;
 }
+.anyClass {
+    height:150px;
+    overflow-y: scroll;
+  }
