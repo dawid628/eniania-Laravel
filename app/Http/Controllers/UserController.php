@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use App\Models\RoleToUser;
 use App\Models\Role;
+use App\Models\Babysitter;
 use Auth;
 
 class UserController extends Controller
@@ -15,7 +16,10 @@ class UserController extends Controller
     public function delete($id)
     {
         if(User::find($id)){
-
+            $babysitter = Babysitter::where('user_id', $id)->first();
+            if($babysitter != null){
+                $babysitter->delete();
+            }
         DB::table("role_user")->where("user_id", $id)->delete();
         DB::table("users")->where("id", $id)->delete();
 

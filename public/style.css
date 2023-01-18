@@ -1,21 +1,4 @@
-.intro-btn {
-    margin-right: 3%;
-    margin-left: 3%;
-    font-size: 150%;
-    padding: 50px;
-    background: transparent;
-    border-radius: 250px; 
-    border: 2px solid #800000;
-    text-decoration: none;
-    color: darkgray;
-}
 
-.intro-btn:hover {
-    color: lightgray;
-}
-.intro-btn a {
-    text-decoration: none;
-}
 /*  */
 .card-body-auto {
     margin-top: 5%;
@@ -33,3 +16,27 @@
     height:150px;
     overflow-y: scroll;
   }
+
+  .pagination > li > a,
+  .pagination > li > span {
+      color: black; 
+      text-decoration-color: white;
+  }
+  
+  .pagination > .active > a,
+  .pagination > .active > a:focus,
+  .pagination > .active > a:hover,
+  .pagination > .active > span,
+  .pagination > .active > span:focus,
+  .pagination > .active > span:hover {
+        background-color:black;
+        border-color: black;
+        color:white;
+  }
+
+  .pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover {
+    color: black;
+}

@@ -7,23 +7,46 @@ use App\Models\Babysitter;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Str;
 use Auth;
+use Intervention\Image\Facades\Image;
 
 class BabysitterController extends Controller
 {
+
+    private function getQuery(Request $request){
+        
+        return Babysitter::paginate(5);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $babysitters = Babysitter::paginate(5);
-        return view('/babysitter/index', ['babysitters' => $babysitters]);
-    }
+        $babysitters = $this->getQuery($request);
 
-    public function sort()
-    {
-        
+        if(isset($request->city))
+        {
+            $babysitters = $babysitters->where('city', '=', $request->city);
+        }
+        if(isset($request->price_min))
+        {
+            $babysitters = $babysitters->where('price', '>=', $request->price_min);
+        }
+        if(isset($request->price_max))
+        {
+            $babysitters = $babysitters->where('price', '<=', $request->price_max);
+        }
+        if(isset($request->age))
+        {
+            $babysitters = $babysitters->where('minimum_age', '<=', $request->age)->where('maximum_age', '>=', $request->age);
+        }
+        if($babysitters->count() > 0)
+        {
+            $cities = Babysitter::Select('city')->groupBy('city')->get();
+            return view('/babysitter/index', ['babysitters' => $babysitters, 'cities' => $cities]);
+        }
+        return view('/babysitter/index', ['babysitters' => $babysitters]);
     }
 
     /**
@@ -44,6 +67,13 @@ class BabysitterController extends Controller
      */
     public function store(Request $request)
     {
+         if($request->hasFile('image')){
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('images/', $filename);
+            $resizedImage = Image::make('images/'.$filename)->fit(400, 400)->save();
+         }
         Auth::user()->fresh();
         $user_id = Auth::id();
         $babysitter = Babysitter::where('user_id', $user_id)->first();
@@ -53,8 +83,8 @@ class BabysitterController extends Controller
             return view('/babysitter/create', ['problem' => $problem]);
         }
         $profile = new Babysitter();
-        $profile->first_name = $request->first_name;
-        $profile->second_name = $request->second_name;
+        $profile->first_name = Str::lower($request->first_name);
+        $profile->second_name = Str::lower($request->second_name);
         $profile->phone_number = $request->phone_number;
         $profile->city = Str::lower($request->city);
         $profile->description = $request->description;
@@ -62,21 +92,10 @@ class BabysitterController extends Controller
         $profile->maximum_age = $request-> maximum_age;
         $profile->price = $request->price;
         $profile->user_id = $user_id;
-        // photo
-        if(!$request->hasFile('image')){
-            $problem = "Zdjęcie nie spełnia warunków serwisu.";
-            return view('/babysitter/create', ['problem' => $problem]);
-        }
-        $file = $request->file('image');
-        $fileName = $file->getClientOriginalName();
-        $destinationPath = public_path().'/images';
-        $file->move($destinationPath, $fileName);
-        $profile->photo_name = $fileName; 
 
-        if(!($profile->save())) {
-            $problem = "Coś poszło nie tak.";
-            return view('/babysitter/create', ['problem' => $problem]);
-        }
+        $profile->photo_name = $filename;
+
+        $profile->save();
         return redirect()->route('index');
     }
 
@@ -127,10 +146,11 @@ class BabysitterController extends Controller
 
         if($request->hasFile('image')){
             $file = $request->file('image');
-            $fileName = $file->getClientOriginalName();
-            $destinationPath = public_path().'/images';
-            $file->move($destinationPath, $fileName);
-            $babysitter->photo_name = $fileName; 
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('images/', $filename);
+            $resizedImage = Image::make('images/'.$filename)->fit(400, 400)->save();
+            $babysitter->photo_name = $filename;
         }
 
         if($babysitter->save()){
