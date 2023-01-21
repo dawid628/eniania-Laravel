@@ -8,6 +8,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\BabysitterController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\OpinionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +23,8 @@ use App\Http\Controllers\MessageController;
 Auth::routes();
 Route::get('/', function () {return view('index');})->name('index');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/opinion-add', [App\Http\Controllers\OpinionController::class, 'store'])->name('send-opinion');
+Route::get('/opinion-delete/{id}', [App\Http\Controllers\OpinionController::class, 'destroy'])->name('destroy-opinion');
 
 Route::group(['middleware' => 'roles', 'roles' => ['admin']], function(){
     Route::get('/makemoderator/{user_id}', [PanelController::class, 'makeModerator'])->name('makeModerator');

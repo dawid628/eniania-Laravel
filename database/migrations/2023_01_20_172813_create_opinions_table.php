@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('opinions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('from_id');
-            $table->unsignedBigInteger('to_id');
-            $table->text('body');
-            $table->boolean('seen')->default(0);
+            $table->unsignedBigInteger('babysitter_id');
+            $table->integer('stars');
+            $table->text('comment')->nullable();
             $table->timestamps();
-//ZAPOMNIALEM DODAC
-            // $table->foreign('from_id')->references('id')->on('users'); 
-            // $table->foreign('to_id')->references('id')->on('users');
+            
+            $table->foreign('babysitter_id')->references('id')->on('babysitters'); 
         });
     }
 
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('opinions');
     }
 };

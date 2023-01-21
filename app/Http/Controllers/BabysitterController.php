@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Babysitter;
+use App\Models\Opinion;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Str;
 use Auth;
@@ -16,6 +17,11 @@ class BabysitterController extends Controller
         
         return Babysitter::paginate(5);
     }
+    private function getOpinion(){
+        
+        return Opinion::paginate(3);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -108,7 +114,19 @@ class BabysitterController extends Controller
     public function show($id)
     {
         $babysitter = Babysitter::find($id);
-        if(!$babysitter==null){
+        $opinions = Opinion::where('babysitter_id', '=', $id)->orderBy('created_at', 'desc')->paginate(3);
+
+        $average = 0;
+        foreach($opinions as $opinion){
+            $average = $average + $opinion->stars;
+        }
+        if($average > 0){
+            $average = $average / $opinions->count();
+        }
+        if(!$babysitter == null){
+            if(!$opinions == null){
+                return view('/babysitter/show', ['babysitter' => $babysitter, 'opinions' => $opinions, 'average' => $average]);
+            }
             return view('/babysitter/show', ['babysitter' => $babysitter]);
         }
     }
