@@ -17,36 +17,49 @@ class MessageController extends Controller
     public function index($id)
     {
         $messages = Message::all();
-        
+
+        if(count($messages) > 0){
+            $chats = array();
+            foreach($messages as $message){
+                if($message->to_id == Auth::id() || $message->from_id == Auth::id())
+                {
+                    if($message->to_id == Auth::id()){
+                        if(!in_array($message->from_id, $chats)){
+                            array_push($chats, $message->from_id);
+                        }
+                    }
+                    if($message->from_id == Auth::id()){
+                        if(!in_array($message->to_id, $chats)){
+                            array_push($chats, $message->to_id);
+                        }
+                    }
+                }
+                // if(!(in_array($message->from_id, $chats))){
+                //     if($message->from_id == Auth::id()){
+                //        array_push($chats, $message->to_id); 
+                //     }
+                // }
+                // if(!(in_array($message->to_id, $chats))){
+                //     if($message->to_id == Auth::id()){
+                //         array_push($chats, $message->from_id);
+                //     }
+                // }   
+            }
+        }
         foreach($messages as $message){
             if(!($message->from_id == Auth::id() || $message->to_id == Auth::id())){
-                $messages->unset($message);
+                unset($messages[$message->key]);
             }
             else{
                 $message->seen = true;
                 $message->save();
             }
         }
-
-        if($messages->count() > 0){
-            $chats = array();
-            foreach($messages as $message){
-                if(!(in_array($message->from_id, $chats))){
-                    if($message->from_id != Auth::id()){
-                       array_push($chats, $message->from_id); 
-                    }
-                    
-                }
-                if(!(in_array($message->to_id, $chats))){
-                    if($message->to_id != Auth::id()){
-                        array_push($chats, $message->to_id);
-                    }
-                    
-                }
-            }
+        if(count($messages) > 0 && count($chats) > 0){
             return view('/messages/chat', ['id' => $id, 'messages' => $messages, 'chats' => $chats]);
         }
-            return view('/messages/chat', ['id' => $id, 'messages' => $messages]);
+           // return view('/messages/chat', ['id' => $id, 'messages' => $messages]);
+           return view('/messages/chat', ['id' => $id]);
     }
 
     /**
@@ -70,11 +83,15 @@ class MessageController extends Controller
         $message = new Message();
         $message->from_id = Auth::id();
         $message->to_id = $request->to_id;
-        $message->body = $request->message;
-        if($message->save()){
-            return redirect()->route('chat', ['id' => $request->to_id]);
+        if($request->message != null){
+            $message->body = $request->message;
+            if($message->from_id != $message->to_id){
+                if($message->save()){
+                    return redirect()->route('chat', ['id' => $request->to_id]);
+                }
+            }
         }
-        return false;
+        return redirect()->route('chat', ['id' => $request->to_id]);
     }
 
     /**

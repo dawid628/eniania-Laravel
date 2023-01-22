@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use App\Models\RoleToUser;
 use App\Models\Role;
+use App\Models\Opinion;
+use App\Models\Message;
 use App\Models\Babysitter;
 use Auth;
 
@@ -15,17 +17,62 @@ class UserController extends Controller
 {
     public function delete($id)
     {
-        if(User::find($id)){
+        if(User::find($id))
+        {
             $babysitter = Babysitter::where('user_id', $id)->first();
-            if($babysitter != null){
+            if($babysitter != null)
+            {
+                $opinions = Opinion::all()->where('babysitter_id', '=', $babysitter->id);
+                foreach($opinions as $opinion)
+                {
+                    $opinion->delete();
+                }
                 $babysitter->delete();
             }
-        DB::table("role_user")->where("user_id", $id)->delete();
-        DB::table("users")->where("id", $id)->delete();
+            DB::table("role_user")->where("user_id", $id)->delete();
+            DB::table("users")->where("id", $id)->delete();
 
-        return redirect()->back()->with('message', 'User deleted succesfully.');
+            $opinions = Opinion::all()->where('author_id', '=', $id);
+            if(count($opinions) > 0)
+            {
+                foreach($opinions as $opinion)
+                {
+                    $opinion->delete();
+                }
+            }
+            $messages = Message::all()->where('from_id', '=', $id);
+            if(count($messages) > 0)
+            {
+                foreach($messages as $message)
+                {
+                    $message->delete();
+                }
+            }
+            $messages = Message::all()->where('to_id', '=', $id);
+            if(count($messages) > 0)
+            {
+                foreach($messages as $message)
+                {
+                    $message->delete();
+                }
+            }
+            $reports = Report::all()->where('user_id', '=', $id);
+            if(count($reports) > 0)
+            {
+                foreach($reports as $report)
+                {
+                    $replies = Reply::all()->where('report_id', '=', $report->id);
+                    foreach($replies as $reply)
+                    {
+                        $reply->delete();
+                    }
+                    $report->delete();
+                }
+            }
+            
+            User::find($id)->delete();
+            return redirect()->back()->with('message', 'User deleted succesfully.');
         }
-
         if(!User::find($id))
             return "User doesn't exists.";
 

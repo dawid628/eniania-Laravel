@@ -32,3 +32,7 @@ function fillStars(id) {
         }
     }
 } 
+
+function messageMyself(){
+  alert('Nie możesz wysyłac wiadomości do siebie samego.')
+}

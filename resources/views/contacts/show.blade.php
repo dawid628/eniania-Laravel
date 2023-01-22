@@ -45,7 +45,7 @@
                    </div>
                </div>
                <div class="text-right">
-                   <button type="submit" class="btn btn-dark waves-effect waves-light mt-3"><i class="fa fa-send mr-1"></i>Wyślij</button>
+                   <button type="submit" class="btn btn-dark waves-effect waves-light mt-3 p-2">Wyślij</button>
                </div>
            
            </div>

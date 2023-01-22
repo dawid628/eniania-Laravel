@@ -187,6 +187,12 @@ class BabysitterController extends Controller
      */
     public function destroy($id)
     {
+        $opinions = Opinion::all()->where('babysitter_id', '=', $id);
+        
+        foreach($opinions as $opinion){
+            $opinion->delete();
+        }
+        
         if(Babysitter::find($id)->delete()){
             $message = "Pomyślnie usunięto profil niani.";
             return redirect()->back()->with('message', $message);

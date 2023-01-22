@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 @isset($message)
 <div class="alert alert-success" role="alert">{{ $message }}</div>
@@ -54,7 +53,6 @@
                     <button type="submit" class="btn btn-dark mt-2 mb-2">Wystaw opinie</button>
                 </form>
             </div>
-            <script type="text/javascript" src="{{ asset('/scripts.js') }}"></script>
             </div>
         </div>
         <div class="mt-5">
