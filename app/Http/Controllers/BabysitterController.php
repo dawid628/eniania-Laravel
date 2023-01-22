@@ -7,7 +7,7 @@ use App\Models\Babysitter;
 use App\Models\Opinion;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Str;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
 class BabysitterController extends Controller
@@ -15,7 +15,7 @@ class BabysitterController extends Controller
 
     private function getQuery(Request $request){
         
-        return Babysitter::paginate(5);
+        return Babysitter::where('confirmed', '=', 1);
     }
     private function getOpinion(){
         
@@ -50,6 +50,7 @@ class BabysitterController extends Controller
         if($babysitters->count() > 0)
         {
             $cities = Babysitter::Select('city')->groupBy('city')->get();
+            $babysitters = $babysitters->paginate(4);
             return view('/babysitter/index', ['babysitters' => $babysitters, 'cities' => $cities]);
         }
         return view('/babysitter/index', ['babysitters' => $babysitters]);
@@ -80,7 +81,6 @@ class BabysitterController extends Controller
             $file->move('images/', $filename);
             $resizedImage = Image::make('images/'.$filename)->fit(400, 400)->save();
          }
-        Auth::user()->fresh();
         $user_id = Auth::id();
         $babysitter = Babysitter::where('user_id', $user_id)->first();
         if(!$babysitter == null){

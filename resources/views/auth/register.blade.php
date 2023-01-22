@@ -66,7 +66,7 @@
                                 <button type="submit" class="btn btn-dark">
                                     Utwórz konto
                                 </button>
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <a class="btn btn-link" href="{{ route('login') }}">
                                         Mam już konto.
                                     </a>
                             </div>

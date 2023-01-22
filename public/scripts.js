@@ -20,7 +20,7 @@ function scrollbarBottom(){
   //Rating stars
 function fillStars(id) {
     var element = document.getElementById(id);
-    var value = element.getAttribute('value');
+    var value = id;
     var input = document.getElementById('starInput');
     input.setAttribute('value', value);
     for (var i = 1; i <= 5; i++) {

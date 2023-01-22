@@ -24,7 +24,7 @@
             <div class="col-md-8">
                 <div class="lead border px-1 w-50">   
                     <p class="h3 m-0 mb-3">Opis profilu</p>
-                    <p class="text-nowrap mb-0"> {!! nl2br($babysitter->description) !!}</p> 
+                    <p class="mb-0 text-break w-50"> {!! nl2br($babysitter->description) !!}</p> 
                     @if(Auth::id() != $babysitter->user_id)
                     <br><a href="{{ route('chat', ['id' => $babysitter->user_id]) }}"class="btn btn-dark mt-0">Napisz wiadomosc</a>
                     @endif
@@ -32,8 +32,12 @@
                     <br><a class="btn btn-dark mt-0" href="/edit/{{ $babysitter->id }}">Edytuj</a>
                     @endif
                 </div>
+
              {{-- div na opinie --}}
-                <div class="col float-end mt-0">
+              
+            </div>
+        </div>
+        <div class="col-sm float-end mt-3 w-25">
                     @isset($average)
         
                     <p class="h1 text-center"> Średnia ocena: {{round($average)}}/5 </p>
@@ -42,24 +46,22 @@
                 <form class="text-center" method="POST" action="{{ route('send-opinion') }}">
                     @csrf
                     <p class="h2 text-center">Wystaw opinie</p>
-                    <span id="1" class="fa fa-lg fa-star m-1" value="1" onclick="fillStars(1)"></span>
-                    <span id="2" class="fa fa-lg fa-star m-1" value="2" onclick="fillStars(2)"></span>
-                    <span id="3" class="fa fa-lg fa-star m-1" value="3" onclick="fillStars(3)"></span>
-                    <span id="4" class="fa fa-lg fa-star m-1" value="4" onclick="fillStars(4)"></span>
-                    <span id="5" class="fa fa-lg fa-star m-1" value="5" onclick="fillStars(5)"></span>
+                    <span id="1" class="fa fa-lg fa-star m-1" onclick="fillStars(1)"></span>
+                    <span id="2" class="fa fa-lg fa-star m-1" onclick="fillStars(2)"></span>
+                    <span id="3" class="fa fa-lg fa-star m-1" onclick="fillStars(3)"></span>
+                    <span id="4" class="fa fa-lg fa-star m-1" onclick="fillStars(4)"></span>
+                    <span id="5" class="fa fa-lg fa-star m-1" onclick="fillStars(5)"></span>
                     <input name="babysitter_id" value="{{ $babysitter->id }}" hidden>
                     <input name="stars" id="starInput" hidden required oninvalid="alert('Wybierz ilość przyznanych gwiazdek')"><br>
-                    <textarea name="comment" type="text" class="mt-2" value="" cols="25" maxlength=50></textarea><br>
+                    <textarea name="comment" class="mt-2" cols="25" maxlength=50></textarea><br>
                     <button type="submit" class="btn btn-dark mt-2 mb-2">Wystaw opinie</button>
                 </form>
             </div>
-            </div>
-        </div>
-        <div class="mt-5">
+        <div class="mt-3 w-75">
             @isset($opinions)
                 @foreach($opinions as $opinion)
                     @if($opinion->comment != null)
-                        <div class="card mb-3">
+                        <div class="card mb-3 w-75">
                             <div class="card-body">
                                 <p class="text-break w-75 ">{{ $opinion->comment }}</p>
                                 <div class="d-flex justify-content-between">

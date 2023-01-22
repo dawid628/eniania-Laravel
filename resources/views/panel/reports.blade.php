@@ -38,5 +38,5 @@
       @else
       <div class="alert alert-warning mt-5" role="alert">Brak oczekujących zgłoszeń.</div>
       @endif
-      {{ $reports->links() }}
+      {{ $reports->links('vendor.pagination.custom') }}
 @endsection

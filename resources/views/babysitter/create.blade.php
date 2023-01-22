@@ -60,8 +60,8 @@
                         <div class="row mb-3">
                             <label for="minimum_age" class="col-md-4 col-form-label text-md-end">Opiekuję się dziećmi w wieku</label>
                             <div class="col-md-2">
-                                od<input id="minimum_age" type="number" max="18" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  max="18" class="form-control" name="minimum_age" required>
-                                do<input id="maximum_age" type="number" max="18" maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" name="maximum_age" required>
+                                od<input id="minimum_age" type="number" max="18" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  max="18" class="form-control" name="minimum_age" required>
+                                do<input id="maximum_age" type="number" max="18" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" name="maximum_age" required>
                             </div>
                         </div>
 
@@ -75,14 +75,14 @@
                         <div class="row mb-3">
                             <label for="description" class="col-md-4 col-form-label text-md-end">Opis</label>
                             <div class="col-md-6">
-                                <textarea id="description" rows="8" class="form-control" name="description" required maxlength="100"></textarea>
+                                <textarea id="description" rows="8" class="form-control" name="description" required maxlength="200"></textarea>
                             </div>
                         </div>
                         
                         <div class="row mb-3">
                             <label class="col-md-4 col-form-label text-md-end">Dodaj zdjęcie</label>
                             <div class="col-md-6">
-                                <input type="file" class="form-control form-control-sm" name="image" accept="image/jpg, image/jpeg, image/png"/>
+                                <input type="file" class="form-control form-control-sm" name="image" accept="image/jpg, image/jpeg, image/png" required/>
                             </div>
                         </div>
 

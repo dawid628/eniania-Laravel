@@ -12,10 +12,10 @@
 #panel-table{
     margin-top: 3%;
 }
-.anyClass {
+/* .anyClass {
     height:150px;
     overflow-y: scroll;
-  }
+  } */
 
   .pagination > li > a,
   .pagination > li > span {

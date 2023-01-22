@@ -28,7 +28,7 @@
           @endforeach
         </tbody>
       </table>
-      {{ $babysitters->links() }}
+      {{ $babysitters->links('vendor.pagination.custom') }}
       @else
       <div class="alert alert-warning mt-5" role="alert">Brak oczekujących niań.</div>
       @endif

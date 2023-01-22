@@ -41,7 +41,7 @@
                    <div class="media-body">
                       <input name="title" value="{{ $report->title }}" hidden>
                       <input name="report_id" value="{{ $report->id }}" hidden>
-                       <textarea class="wysihtml5 form-control" name="answer" rows="9" placeholder="Odpowiedz tutaj..."></textarea>
+                       <textarea class="wysihtml5 form-control" name="answer" rows="9" maxlength="200" placeholder="Odpowiedz tutaj..."></textarea>
                    </div>
                </div>
                <div class="text-right">

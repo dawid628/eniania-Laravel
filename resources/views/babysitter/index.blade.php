@@ -37,10 +37,10 @@
             </div>
             <div class="form-group mt-2">
                 <label>Wiek dziecka:</label>
-                            <input name="age" type="text" class="form-control w-50" max="18" maxlength="2" onkeypress='return event.charCode >= 48 && 
+                            <input name="age" type="text" class="form-control w-50" maxlength="2" onkeypress='return event.charCode >= 48 && 
                             event.charCode <= 57'>
             </div>
-            <button type="sumbit" class="btn btn-dark mt-2">Szukaj</button>
+            <button type="submit" class="btn btn-dark mt-2">Szukaj</button>
             <a class="btn btn-dark mt-2" href="{{ route('index-babysitters') }}">Zresetuj</a>
         </form>
     </div>
@@ -64,8 +64,8 @@
     </div>
     @endif
     @endforeach
-    @if($babysitters->count() > 4)
-     {{ $babysitters->links() }} 
-     @endif
+ @if($babysitters->count() > 3)
+     {{ $babysitters->links('vendor.pagination.custom') }} 
+  @endif
 </div>
 @endsection
