@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
+use App\Models\Message;
+use Auth;
 
 class MessageController extends Controller
 {
@@ -11,9 +14,39 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return view('/messages/chat');
+        $messages = Message::all();
+        
+        foreach($messages as $message){
+            if(!($message->from_id == Auth::id() || $message->to_id == Auth::id())){
+                $messages->unset($message);
+            }
+            else{
+                $message->seen = true;
+                $message->save();
+            }
+        }
+
+        if($messages->count() > 0){
+            $chats = array();
+            foreach($messages as $message){
+                if(!(in_array($message->from_id, $chats))){
+                    if($message->from_id != Auth::id()){
+                       array_push($chats, $message->from_id); 
+                    }
+                    
+                }
+                if(!(in_array($message->to_id, $chats))){
+                    if($message->to_id != Auth::id()){
+                        array_push($chats, $message->to_id);
+                    }
+                    
+                }
+            }
+            return view('/messages/chat', ['id' => $id, 'messages' => $messages, 'chats' => $chats]);
+        }
+            return view('/messages/chat', ['id' => $id, 'messages' => $messages]);
     }
 
     /**
@@ -34,7 +67,14 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = new Message();
+        $message->from_id = Auth::id();
+        $message->to_id = $request->to_id;
+        $message->body = $request->message;
+        if($message->save()){
+            return redirect()->route('chat', ['id' => $request->to_id]);
+        }
+        return false;
     }
 
     /**

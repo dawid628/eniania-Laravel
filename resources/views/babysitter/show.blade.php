@@ -27,7 +27,7 @@
                     <p class="h3 m-0 mb-3">Opis profilu</p>
                     <p class="text-nowrap mb-0"> {!! nl2br($babysitter->description) !!}</p> 
                     @if(Auth::id() != $babysitter->user_id)
-                    <br><button class="btn btn-dark mt-0">Napisz wiadomosc</button>
+                    <br><a href="{{ route('chat', ['id' => $babysitter->user_id]) }}"class="btn btn-dark mt-0">Napisz wiadomosc</a>
                     @endif
                     @if(Auth::id() == $babysitter->user_id)
                     <br><a class="btn btn-dark mt-0" href="/edit/{{ $babysitter->id }}">Edytuj</a>
@@ -54,22 +54,7 @@
                     <button type="submit" class="btn btn-dark mt-2 mb-2">Wystaw opinie</button>
                 </form>
             </div>
-                <script>
-                    function fillStars(id) {
-                        var element = document.getElementById(id);
-                        var value = element.getAttribute('value');
-                        var input = document.getElementById('starInput');
-                        input.setAttribute('value', value);
-                        for (var i = 1; i <= 5; i++) {
-                            if(i <= value){
-                            document.getElementById(i).style.color = "yellow";
-                        }
-                        else{
-                            document.getElementById(i).style.color = null; 
-                        }
-                        }
-                    } 
-                </script>
+            <script type="text/javascript" src="{{ asset('/scripts.js') }}"></script>
             </div>
         </div>
         <div class="mt-5">

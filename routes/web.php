@@ -70,7 +70,9 @@ Route::group(['middleware' => 'roles', 'roles' => ['admin', 'moderator', 'user']
     Route::post('/report', [ReportController::class, 'store'])->name('create-report');
 
     // Chat
-    Route::get('/chat', [App\Http\Controllers\MessageController::class, 'index'])->name('chat');
-});
+    Route::get('/chat/{id}', [App\Http\Controllers\MessageController::class, 'index'])->name('chat');
+    Route::post('/send-message', [App\Http\Controllers\MessageController::class, 'store'])->name('send-message');
 
-Route::post('/sendMail', [MailController::class, 'sendMail'])->name('sendMail');
+    // Contact
+    Route::post('/sendMail', [MailController::class, 'sendMail'])->name('sendMail');
+});
