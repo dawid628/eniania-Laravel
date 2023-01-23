@@ -52,9 +52,9 @@ Oprogramowanie zostało stworzone za pomocą frameworka Laravel. Backend oparty 
 </ul>
 
 ## Diagram przypadków użycia
-<img src="dpu.png"  width="400" height="400" alt="error" />
+<img src="/dpu.png"  width="400" height="400" alt="error" />
 
 ## Baza danych
-<img src="bazdanych.png"  width="400" height="400" alt="error" />
+<img src="/bazdanych.png"  width="400" height="400" alt="error" />
 
 ## Interfejs użytkownika
