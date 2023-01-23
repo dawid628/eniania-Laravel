@@ -52,7 +52,7 @@ Oprogramowanie zostało stworzone za pomocą frameworka Laravel. Backend oparty 
 </ul>
 
 ## Diagram przypadków użycia
-<img src="/dpu.png"  width="400" height="400" alt="error" />
+<img src="https://www.facebook.com/messenger_media/?attachment_id=6142489839103035&message_id=mid.%24cAABa89GDl6qMEEmW52F3wRKZK3Z7&thread_id=100003238614954"  width="400" height="400" alt="error" />
 
 ## Baza danych
 <img src="/bazdanych.png"  width="400" height="400" alt="error" />
