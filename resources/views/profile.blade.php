@@ -13,7 +13,7 @@
 @if(Session::has('error'))
 <div class="alert alert-danger" role="alert">{{Session::get('error')}}</div>
 @endif
-<div class="container">
+<div class="section">
     <h1 class="display-4 m-2 text-center mb-0">Profil użytkownika</h1>
     <div class="card-body p-5">
         <form method="POST" action="{{ route('store-user') }}">
@@ -28,11 +28,11 @@
             <input class="form-control" value="{{ $user->created_at }}" disabled><br>
             <label class="col-md-4 col-form-label">Data ostatniej zmiany</label><br>
             <input class="form-control" value="{{ $user->updated_at }}" disabled><br>
-            <button type="submit" class="btn btn-dark">Zapisz zmiany</button>
+            <button type="submit" class="layout-btn">Zapisz zmiany</button>
         </form>
     </div>
     @if(\App\Models\Babysitter::where('user_id', $user->id)->first() != null)
-    <h2 class="display-7 p-5 pt-0 mb-0">Twój profil niani:</h2>
+    <h2 class="display-7 p-5 pt-0 pb-2 mb-0">Twój profil niani:</h2>
         <table class="table table-bordered m-5 mt-0">
             <thead>
               <tr>
@@ -57,9 +57,9 @@
                   @endif
                 </td>
                 <td>
-                  <a class="btn btn-dark m-2" href="/babysitter/{{\App\Models\Babysitter::where('user_id', $user->id)->value('id')}}">Podgląd</a>
-                  <a class="btn btn-dark m-2" href="edit/{{\App\Models\Babysitter::where('user_id', $user->id)->value('id')}}">Edytuj</a>
-                  <a class="btn btn-dark m-2" href="delete/{{ \App\Models\Babysitter::where('user_id', $user->id)->value('id') }}">Usuń</a>
+                  <a class="layout-btn m-2" href="/babysitter/{{\App\Models\Babysitter::where('user_id', $user->id)->value('id')}}">Podgląd</a>
+                  <a class="layout-btn m-2" href="edit/{{\App\Models\Babysitter::where('user_id', $user->id)->value('id')}}">Edytuj</a>
+                  <a class="layout-btn m-2" href="delete/{{ \App\Models\Babysitter::where('user_id', $user->id)->value('id') }}">Usuń</a>
                 </td>
               </tr>
             </tbody>

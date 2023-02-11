@@ -21,8 +21,8 @@
             <td>{{ $babysitter->city }}</td>
             <td>{{ $babysitter->created_at }}</td>
             <td>
-              <a class="btn btn-dark p-1 mr-1" href="/babysitter/{{$babysitter->id}}">Podgląd</a>
-              <a class="btn btn-dark p-1 mr-1" href="/confirm/{{ $babysitter->id }}">Zatwierdź</a>
+              <a class="layout-btn p-1 mr-1" href="/babysitter/{{$babysitter->id}}">Podgląd</a>
+              <a class="layout-btn p-1 mr-1" href="/confirm/{{ $babysitter->id }}">Zatwierdź</a>
             </td>
           </tr>
           @endforeach

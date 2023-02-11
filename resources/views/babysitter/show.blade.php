@@ -6,17 +6,17 @@
 @isset($error)
 <div class="alert alert-danger" role="alert">{{ $error }}</div>
 @endisset
-    <div class="container">
+    <div class="section">
         <div class="row mt-5">
             <!-- Babysitter image -->
             <figure class="figure col-sm">
                 <img class="figure-img img-fluid rounded" src="/images/{{$babysitter->photo_name}}" width="400" height="400" alt="error" />
                 <figcaption>
-                    <label><strong>Imię:</strong> {{ $babysitter->first_name }}</label><br>
-                    <label><strong>Nazwisko:</strong> {{ $babysitter->second_name }}</label><br>
+                    <label><strong>Imię:</strong> {{ ucfirst($babysitter->first_name) }}</label><br>
+                    <label><strong>Nazwisko:</strong> {{ ucfirst($babysitter->second_name) }}</label><br>
                     <label><strong>Numer telefonu:</strong> {{ $babysitter->phone_number }}</label><br>
                     <label><strong>Adres e-mail:</strong> {{ \App\Models\User::find($babysitter->user_id)->email }}</label><br>
-                    <label><strong>Miasto:</strong> {{ $babysitter->city }}</label><br>
+                    <label><strong>Miasto:</strong> {{ ucfirst($babysitter->city) }}</label><br>
                     <label><strong>Wiek dziecka:</strong> {{ $babysitter->minimum_age }}-{{ $babysitter->maximum_age }} lata</label><br>
                     <label><strong>Cena za 1h:</strong> {{ $babysitter->price }} PLN</label><br>
                 </figcaption>
@@ -29,7 +29,7 @@
                     <br><a href="{{ route('chat', ['id' => $babysitter->user_id]) }}"class="btn btn-dark mt-0">Napisz wiadomosc</a>
                     @endif
                     @if(Auth::id() == $babysitter->user_id)
-                    <br><a class="btn btn-dark mt-0" href="/edit/{{ $babysitter->id }}">Edytuj</a>
+                    <br><a class="layout-btn mt-0" href="/edit/{{ $babysitter->id }}">Edytuj</a>
                     @endif
                 </div>
 
@@ -54,7 +54,7 @@
                     <input name="babysitter_id" value="{{ $babysitter->id }}" hidden>
                     <input name="stars" id="starInput" hidden required oninvalid="alert('Wybierz ilość przyznanych gwiazdek')"><br>
                     <textarea name="comment" class="mt-2" cols="25" maxlength=50></textarea><br>
-                    <button type="submit" class="btn btn-dark mt-2 mb-2">Wystaw opinie</button>
+                    <button type="submit" class="layout-btn mt-2 mb-2">Wystaw opinie</button>
                 </form>
             </div>
         <div class="mt-3 w-75">

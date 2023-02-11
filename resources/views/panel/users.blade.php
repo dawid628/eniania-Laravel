@@ -35,21 +35,21 @@
                 @if($user->roles->last()->name == 'user')
                   @if(Auth::user()->roles->last()->name == 'admin')
                   <div class="row m-1">
-                    <a class="btn btn-primary mt-1" href="/makemoderator/{{ $user->id }}">Nadaj moderatora</a>
+                    <a class="layout-btn mt-1" href="/makemoderator/{{ $user->id }}">Nadaj moderatora</a>
                   </div>
                   @endif
                 @endif
                 @if($user->roles->last()->name == 'moderator')
                   @if(Auth::user()->roles->last()->name == 'admin')
                   <div class="row m-1">
-                    <a class="btn btn-primary mt-1" href="/makeuser/{{ $user->id }}">Zabierz moderatora</a>
+                    <a class="layout-btn mt-1" href="/makeuser/{{ $user->id }}">Zabierz moderatora</a>
                   </div>
                   @endif
                 @endif
                 @if($user->roles->last()->name != 'admin')
                 @if(Auth::user()->roles->last()->name == 'admin')
                   <div class="row m-1">
-                    <a class="btn btn-primary mt-1" href="/makeadmin/{{ $user->id }}">Oddaj administratora</a>
+                    <a class="layout-btn mt-1" href="/makeadmin/{{ $user->id }}">Oddaj administratora</a>
                   </div>
                 @endif
                 @endif

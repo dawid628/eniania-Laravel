@@ -1,6 +1,6 @@
 @component('mail::message')
     # Re: {{ $title }}
-    {!! nl2br($answer) !!}
+    <p class="text-break">{!! nl2br($answer) !!}</p>
 @component('mail::button', ['url' => 'google.com'])
     Kliknij tutaj
 @endcomponent

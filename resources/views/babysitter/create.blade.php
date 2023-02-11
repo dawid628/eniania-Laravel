@@ -60,8 +60,8 @@
                         <div class="row mb-3">
                             <label for="minimum_age" class="col-md-4 col-form-label text-md-end">Opiekuję się dziećmi w wieku</label>
                             <div class="col-md-2">
-                                od<input id="minimum_age" type="number" max="18" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  max="18" class="form-control" name="minimum_age" required>
-                                do<input id="maximum_age" type="number" max="18" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" name="maximum_age" required>
+                                od<input id="minimum_age" type="number" min="0" max="18" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" name="minimum_age" required>
+                                do<input id="maximum_age" type="number" min="0" max="18" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" name="maximum_age" required>
                             </div>
                         </div>
 

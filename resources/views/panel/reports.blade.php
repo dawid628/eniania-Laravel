@@ -26,9 +26,9 @@
               @endif
             </td>
             <td>
-              <a class="btn btn-dark p-1 mr-1" href="/report/{{ $report->id }}">Podgląd</a>
+              <a class="layout-btn p-1 mr-1" href="/report/{{ $report->id }}">Podgląd</a>
               @if($report->status != 1)
-              <a class="btn btn-dark p-1 mr-1" href="/confirm-report/{{ $report->id }}">Zatwierdź</a>
+              <a class="layout-btn p-1 mr-1" href="/confirm-report/{{ $report->id }}">Zatwierdź</a>
               @endif
             </td>
           </tr>

@@ -8,10 +8,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use App\Models\RoleToUser;
 use App\Models\Role;
+use App\Models\Reply;
+use App\Models\Report;
 use App\Models\Opinion;
 use App\Models\Message;
 use App\Models\Babysitter;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -30,11 +32,9 @@ class UserController extends Controller
                 $babysitter->delete();
             }
             DB::table("role_user")->where("user_id", $id)->delete();
-            DB::table("users")->where("id", $id)->delete();
 
             $opinions = Opinion::all()->where('author_id', '=', $id);
-            if(count($opinions) > 0)
-            {
+            if($opinions != null){
                 foreach($opinions as $opinion)
                 {
                     $opinion->delete();
@@ -69,12 +69,14 @@ class UserController extends Controller
                     $report->delete();
                 }
             }
+            if(User::find($id)){
+                User::find($id)->delete();
+            }
             
-            User::find($id)->delete();
-            return redirect()->back()->with('message', 'User deleted succesfully.');
+            return redirect()->back()->with('message', 'Użytkownik został usunięty.');
         }
         if(!User::find($id))
-            return "User doesn't exists.";
+            return "Usuwanie nie powiodło się.";
 
     }
 

@@ -101,8 +101,11 @@ class BabysitterController extends Controller
 
         $profile->photo_name = $filename;
 
-        $profile->save();
-        return redirect()->route('index');
+        if($profile->save()){
+            return redirect()->route('index');
+        }
+        $error = "Zdjęcie ma za duży rozmiar.";
+        return redirect()->route('index')->with('error', $error);
     }
 
     /**

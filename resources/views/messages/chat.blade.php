@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
 <div class="container py-5">
   <div class="row">
     <div class="col-md-12">
@@ -96,11 +95,13 @@
               @endisset
             </div>
             @isset($messages)
-            @if($messages->where('to_id', '=', $id)->count() == 0)
-              @if($messages->where('from_id', '=', $id)->count() == 0)
+            @if(App\Models\Message::where('to_id', '=', $id)->where('from_id', '=', Auth::id())->count() == 0)
+              @if(App\Models\Message::where('from_id', '=', $id)->where('to_id', '=', Auth::id())->count() == null)
+                @if($id != Auth::id())
                 <div class="d-flex flex-row justify-content-center">  
                   Wiadomość do użytkownika: {{ App\Models\User::find($id)->name }}</p>
                 </div>
+                @endif
               @endif
             @endif
             @endisset
@@ -108,9 +109,9 @@
               <input ID="msgInput" name="message" type="text" class="form-control form-control-lg" id="exampleFormControlInput2" placeholder="Wpisz wiadomość" value="">
               <input name="to_id" value="{{ $id }}" hidden>
               @if($id != Auth::user()->fresh()->id)
-              <button id="btn" type="submit" class="btn btn-dark"><i class="fa fa-send m-2"></i></button>
+              <button id="btn" type="submit" class="layout-btn primary"><i class="fa fa-send m-2"></i></button>
               @else
-              <a id="btn" onclick="messageMyself()" class="btn btn-dark"><i class="fa fa-send m-2"></i></a>
+              <a id="btn" onclick="messageMyself()" class="btn btn-primary"><i class="fa fa-send m-2"></i></a>
               @endif
             </div>
             </form>

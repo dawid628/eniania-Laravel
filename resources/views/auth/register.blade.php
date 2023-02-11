@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Rejestracja</div>
+                <div class="card-header text-white">Rejestracja</div>
 
                 <div class="card-body-auto">
                     <form method="POST" action="{{ route('register') }}">
@@ -63,7 +63,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-dark">
+                                <button type="submit" class="layout-btn">
                                     Utwórz konto
                                 </button>
                                 <a class="btn btn-link" href="{{ route('login') }}">

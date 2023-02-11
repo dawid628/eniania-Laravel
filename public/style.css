@@ -1,4 +1,7 @@
-
+html, body{
+    background-color: #ebf5fbd3;
+    width: 100%;
+}
 /*  */
 .card-body-auto {
     margin-top: 5%;
@@ -19,7 +22,7 @@
 
   .pagination > li > a,
   .pagination > li > span {
-      color: black; 
+      color: #0077C9; 
       text-decoration-color: white;
   }
   
@@ -29,14 +32,116 @@
   .pagination > .active > span,
   .pagination > .active > span:focus,
   .pagination > .active > span:hover {
-        background-color:black;
+        background-color:#0077C9;
         border-color: black;
         color:white;
+        border: #0077C9 1px solid;
   }
 
 .pagination > li > a:focus,
 .pagination > li > a:hover,
 .pagination > li > span:focus,
 .pagination > li > span:hover {
-    color: black;
+    color: #0077C9;
+}
+
+.menu-top {
+    background-color:#007BFF;
+    display: inline-block;
+    width: 100%;
+    height: 4.5em;
+    position:fixed;
+    top:0;
+}
+.brand {
+    color: #FFFFFF;
+    margin-left: 1em;
+    margin-right: 1em;
+    font-size: 1.7em;
+    text-decoration: none;
+    font-style: italic;
+    margin-top: 0%;
+}
+.brand:hover, .menu-item:hover{
+    width: 4.2em;
+    text-align:center;
+    background-color: rgba(0%, 0%, 0%, 0.25);
+    background-size: 200% 200%;
+    color: white;
+    border-radius: 50%;
+}
+.menu-item {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1.5em;
+    margin-top: auto;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+.menu-right {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+.section {
+    margin-top: 5em;
+    background-color: #ebf5fbd3; 
+    padding-left: 2em;
+    padding-right: 2em;
+}
+.section h1 {
+    text-align: center;
+    margin-top: 1.5em;
+    font-size: 5em;
+}
+
+.index-btn {
+    text-decoration: none;
+    background-color: #0077C9;
+    color:#FFFFFF;
+    height: 3em;
+    padding-top: 3.9%;
+    width: 4em;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 4em;
+    float:left;
+    margin-right: 0.5em;
+}
+.index-btn:hover, .layout-btn:hover {
+    color: #FFFFFF;
+    opacity: 0.75;
+}
+
+.group {
+    margin-top: 2em;
+    margin-left: 31%;
+}
+.layout-btn {
+    background-color: #0077C9;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    border:#0077C9 solid 1px;
+    display:inline-flex;
+    place-content: center;
+}
+
+.contact-form {
+    border: 1px solid #0077C9;
+    width:50%;
+    text-align: center;
+    margin-left: 25%;
+    padding: 2em;
+    padding-top: 0.4em;
+    padding-bottom: 1em;
+}
+
+.contact-form input {
+    width:50%;
+    margin-left: 25%;
+}
+.card-header {
+    background-color: #0066CC!important;
 }

@@ -7,13 +7,13 @@
 @if(Session::has('error'))
 <div class="alert alert-danger" role="alert">{{Session::get('error')}}</div>
 @endif
-<div class="container">
-<h1 class="text-center">PANEL ADMINISTRATORA</h1>
+<div class="section">
+<h1 class="text-center mt-2">Panel administratora</h1>
 <div class="text-center">
-  <a class="btn btn-light" href="{{route('panel')}}">Użytkownicy</a>
-  <a class="btn btn-light" href="{{ route('confirming') }}">Oczekujące</a>
-  <a class="btn btn-light" href="{{route('panel-babysitters')}}">Ogłoszenia</a>
-  <a class="btn btn-light" href="{{ route('reports') }}">Zgłoszenia</a>
+  <a class="layout-btn" href="{{route('panel')}}">Użytkownicy</a>
+  <a class="layout-btn" href="{{ route('confirming') }}">Oczekujące</a>
+  <a class="layout-btn" href="{{route('panel-babysitters')}}">Ogłoszenia</a>
+  <a class="layout-btn" href="{{ route('reports') }}">Zgłoszenia</a>
 </div>
     @yield('contento')
     </div>
